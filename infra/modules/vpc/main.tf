@@ -11,7 +11,7 @@ resource "aws_vpc" "main" {
   
 }
 
-# create public subnets for the alb
+# create public subnets for the alb and nat gateways
 resource "aws_subnet" "public_subnets" {
     for_each = var.public_subnets
     vpc_id = aws_vpc.main.id
