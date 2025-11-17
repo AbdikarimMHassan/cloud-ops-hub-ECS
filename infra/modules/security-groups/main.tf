@@ -1,7 +1,7 @@
 resource "aws_security_group" "alb_security_group" {
     name = var.alb_sg_name
     vpc_id = var.vpc_id  
-
+# accept all traffic coming from ports 80 and 443
     ingress  {
     description = "allow inbound http access"
     from_port = 80
@@ -10,13 +10,13 @@ resource "aws_security_group" "alb_security_group" {
     protocol = "tcp"
     }
    ingress {
-    description = "allow https access"
+    description = "allow  inbound https access"
     from_port = 443
     to_port = 443
     cidr_blocks = [ "0.0.0.0/0"]
     protocol = "tcp"
    }
-
+# allow all outbound traffic
    egress {
 
     description = "allow all outbound traffic"
