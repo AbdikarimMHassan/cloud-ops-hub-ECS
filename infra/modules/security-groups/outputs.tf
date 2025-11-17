@@ -1,0 +1,5 @@
+output "alb_security_group" {
+    description = "expose security group"
+    value = aws_security_group.alb_security_group.id
+  
+}
