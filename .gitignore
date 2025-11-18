@@ -23,3 +23,13 @@ Thumbs.db
 coverage
 
 /build
+
+# Terraform
+*.tfvars
+*.auto.tfvars
+terraform.tfvars
+*.tfstate
+*.tfstate.*
+.crash
+.terraform/
+.terraform.lock.hcl
