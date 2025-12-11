@@ -9,3 +9,14 @@ variable "alb_sg_name" {
     default = "alb_sg_name"
   
 }
+
+
+variable "ecs_sg_name" {
+    type = string
+  
+}
+
+variable "app_port" {
+    type = string
+  
+}

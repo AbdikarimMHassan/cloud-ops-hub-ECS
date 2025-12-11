@@ -29,9 +29,27 @@ resource "aws_security_group" "alb_security_group" {
    tags = {
      name = "alb security group"
    }
+   }
 
 
+   resource "aws_security_group" "ecs_security_group" {
+    name = var.ecs_sg_name
+    vpc_id = var.vpc_id
+
+
+    ingress {
+      from_port = var.app_port
+      to_port = var.app_port
+      protocol = "tcp"
+      security_groups = [ aws_security_group.alb_security_group.id ]
+    }
+
+    egress {
+      from_port = 0
+      to_port = 0
+      protocol = "-1"
+      cidr_blocks = [ "0.0.0.0/0" ]
+    }
 
 
    }
-
