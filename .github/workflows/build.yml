@@ -19,7 +19,7 @@ jobs:
     
     env:
       AWS_REGION: eu-north-1
-      ECR_REPOSITORY: cloud-ops-hub
+      ECR_REPOSITORY: cloud-ops
       SSM_PARAMETER_NAME: /cloud-ops-hub/image-tag
     
     steps:
