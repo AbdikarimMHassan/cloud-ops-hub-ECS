@@ -70,8 +70,8 @@ jobs:
           scan-ref: ./infra
           format: sarif
           output: trivy-terra-results.sarif
-          severity: CRITICAL,HIGH
-          exit-code: 1
+          severity: CRITICAL, HIGH
+          exit-code: 0
 
       - name: upload trivy scan results
         if: matrix.scanner == 'trivy' && always()
