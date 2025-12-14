@@ -92,9 +92,9 @@ module "CloudWatch" {
 }
 
 module "ssm" {
-  source = "./modules/ssm"
-  ssm_parameter_name = "/cloud-ops-hub/image-tag"
-  description = " store the commit sha ID of every github actions workflow deployment"
-  ssm_parameter_type = "String"
+  source               = "./modules/ssm"
+  ssm_parameter_name   = "/cloud-ops-hub/image-tag"
+  description          = " store the commit sha ID of every github actions workflow deployment"
+  ssm_parameter_type   = "String"
   ssm_parameter_intial = "Initial"
 }

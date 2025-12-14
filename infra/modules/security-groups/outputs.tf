@@ -1,10 +1,10 @@
 output "alb_security_group" {
-    description = "expose security group"
-    value = aws_security_group.alb_security_group.id
-  
+  description = "expose security group"
+  value       = aws_security_group.alb_security_group.id
+
 }
 
 
 output "ecs_security_group" {
-    value = aws_security_group.ecs_security_group.id
+  value = aws_security_group.ecs_security_group.id
 }

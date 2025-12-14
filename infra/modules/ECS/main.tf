@@ -62,26 +62,26 @@ resource "aws_ecs_task_definition" "app_task_definition" {
   cpu                      = var.app_task_definition_cpu
   memory                   = var.app_task_definition_memory
   execution_role_arn       = aws_iam_role.ecs_exec_role.arn
-  
+
   tags = {
     Application = "cloud-ops-hub"
   }
-  
+
   container_definitions = jsonencode([
     {
-      name      = var.container_name
-      
-      image     = "${data.aws_ecr_repository.cloud-ops-hub-app.repository_url}:${data.aws_ssm_parameter.image_tag.value}"
-      
+      name = var.container_name
+
+      image = "${data.aws_ecr_repository.cloud-ops-hub-app.repository_url}:${data.aws_ssm_parameter.image_tag.value}"
+
       essential = true
-      
+
       portMappings = [
         {
           containerPort = var.app_port
           protocol      = "tcp"
         }
       ]
-      
+
       logConfiguration = {
         logDriver = "awslogs"
         options = {
@@ -95,26 +95,26 @@ resource "aws_ecs_task_definition" "app_task_definition" {
 }
 
 resource "aws_ecs_service" "cloud-hub-app-service" {
-  name = var.ecs_service_name
-  cluster = aws_ecs_cluster.cloud_hub_app_cluster.id
+  name            = var.ecs_service_name
+  cluster         = aws_ecs_cluster.cloud_hub_app_cluster.id
   task_definition = aws_ecs_task_definition.app_task_definition.arn
-  desired_count = var.desired_count
-  launch_type = "FARGATE"
-  
+  desired_count   = var.desired_count
+  launch_type     = "FARGATE"
+
   deployment_controller {
     type = "ECS"
   }
-  
+
   network_configuration {
-    subnets = var.private_app_subnet_ids
-    security_groups = [ var.ecs_security_group_ids ]
+    subnets         = var.private_app_subnet_ids
+    security_groups = [var.ecs_security_group_ids]
   }
-  
+
   load_balancer {
     target_group_arn = var.target_group_arn
-    container_name = var.container_name
-    container_port = var.app_port
+    container_name   = var.container_name
+    container_port   = var.app_port
   }
-  
-  depends_on = [ var.http_listener_arn, var.https_listener_arn ]
+
+  depends_on = [var.http_listener_arn, var.https_listener_arn]
 }

@@ -1,30 +1,30 @@
 
 
 variable "cpu_threshold" {
-    type = number
-  
+  type = number
+
 }
 
 variable "period" {
-    type = number
-  
+  type = number
+
 }
 
 variable "evaluation_periods" {
-    type = number
+  type = number
 
-  
+
 }
 
 variable "cluster_name" {
-    type = string
-  
+  type = string
+
 }
 
 variable "ecs_service_name" {
-    type = string
+  type = string
 }
 
 variable "sns_topic_arn" {
-    type = string
+  type = string
 }

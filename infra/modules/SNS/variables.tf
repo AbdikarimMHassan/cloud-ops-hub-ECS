@@ -1,21 +1,21 @@
 variable "sns_topic_name" {
-    type = string
-  
+  type = string
+
 }
 
 variable "sns_subscription_alarm" {
-    type = string
-  
+  type = string
+
 }
 
 variable "sns_protocol" {
-    type = string
-  
+  type = string
+
 }
 
 variable "sns_alert_endpoint" {
-    type = string
-  
+  type = string
+
 }
 
 

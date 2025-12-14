@@ -1,8 +1,8 @@
 # create vpc resource
 resource "aws_vpc" "main" {
-  cidr_block = var.vpc_cidr
+  cidr_block           = var.vpc_cidr
   enable_dns_hostnames = true
-  enable_dns_support = true
+  enable_dns_support   = true
 
   tags = {
     Name = var.vpc_name
@@ -11,10 +11,10 @@ resource "aws_vpc" "main" {
 
 # create public subnets for the alb and nat gateways
 resource "aws_subnet" "public_subnets" {
-  for_each = var.public_subnets
-  vpc_id = aws_vpc.main.id
-  cidr_block = each.value.cidr_block
-  availability_zone = each.value.availability_zone
+  for_each                = var.public_subnets
+  vpc_id                  = aws_vpc.main.id
+  cidr_block              = each.value.cidr_block
+  availability_zone       = each.value.availability_zone
   map_public_ip_on_launch = true
 
   tags = {
@@ -25,10 +25,10 @@ resource "aws_subnet" "public_subnets" {
 
 # create private subnets for the app
 resource "aws_subnet" "private_app_subnets" {
-  for_each = var.private_app_subnets
-  vpc_id = aws_vpc.main.id
-  cidr_block = each.value.cidr_block
-  availability_zone = each.value.availability_zone
+  for_each                = var.private_app_subnets
+  vpc_id                  = aws_vpc.main.id
+  cidr_block              = each.value.cidr_block
+  availability_zone       = each.value.availability_zone
   map_public_ip_on_launch = false
 
   tags = {
@@ -57,15 +57,15 @@ resource "aws_route_table" "public_rt" {
 
 # create public route to internet gateway
 resource "aws_route" "public_internet_access" {
-  route_table_id = aws_route_table.public_rt.id
+  route_table_id         = aws_route_table.public_rt.id
   destination_cidr_block = "0.0.0.0/0"
-  gateway_id = aws_internet_gateway.igw.id
+  gateway_id             = aws_internet_gateway.igw.id
 }
 
 # create private subnet route table for the app
 resource "aws_route_table" "private_rt" {
   for_each = var.private_app_subnets
-  vpc_id = aws_vpc.main.id
+  vpc_id   = aws_vpc.main.id
 
   tags = {
     Name = "private-app-rt-${each.key}"
@@ -76,29 +76,29 @@ resource "aws_route_table" "private_rt" {
 resource "aws_route" "private_nat_access" {
   for_each = var.private_app_subnets
 
-  route_table_id = aws_route_table.private_rt[each.key].id
+  route_table_id         = aws_route_table.private_rt[each.key].id
   destination_cidr_block = "0.0.0.0/0"
-  nat_gateway_id = aws_nat_gateway.ngw[each.key].id
+  nat_gateway_id         = aws_nat_gateway.ngw[each.key].id
 }
 
 # associate public subnet with the public route table
 resource "aws_route_table_association" "public_rt_association" {
-  for_each = var.public_subnets
-  subnet_id = aws_subnet.public_subnets[each.key].id
+  for_each       = var.public_subnets
+  subnet_id      = aws_subnet.public_subnets[each.key].id
   route_table_id = aws_route_table.public_rt.id
 }
 
 # associate private subnet with the private route table
 resource "aws_route_table_association" "private_rt_association" {
-  for_each = var.private_app_subnets
-  subnet_id = aws_subnet.private_app_subnets[each.key].id
+  for_each       = var.private_app_subnets
+  subnet_id      = aws_subnet.private_app_subnets[each.key].id
   route_table_id = aws_route_table.private_rt[each.key].id
 }
 
 # create elastic ip for the nat gateway
 resource "aws_eip" "nat" {
   for_each = var.public_subnets
-  domain = "vpc"
+  domain   = "vpc"
 
   tags = {
     Name = "NAT-EIP-${each.key}"
@@ -107,9 +107,9 @@ resource "aws_eip" "nat" {
 
 # create nat gateway to provide internet access for the private subnets
 resource "aws_nat_gateway" "ngw" {
-  for_each = var.public_subnets
+  for_each      = var.public_subnets
   allocation_id = aws_eip.nat[each.key].id
-  subnet_id = aws_subnet.public_subnets[each.key].id
+  subnet_id     = aws_subnet.public_subnets[each.key].id
 
   depends_on = [aws_internet_gateway.igw]
 

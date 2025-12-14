@@ -57,13 +57,13 @@ variable "retention_in_days" {
 }
 
 variable "repository_name" {
-    type = string
-  
+  type = string
+
 }
 
 variable "ssm_parameter_name" {
   type = string
-  
+
 }
 
 variable "ssm_iamrole_name" {
