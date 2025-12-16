@@ -1,4 +1,4 @@
-# AWS ECS Two-Tier Architecture with CI/CD
+# Cloud Ops Hub: End-to-End Infrastructure Deployment on AWS ECS
 
 ## Table of Contents
 
