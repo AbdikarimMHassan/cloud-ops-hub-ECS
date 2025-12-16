@@ -43,7 +43,7 @@ User → Cloudflare → Route 53 → Internet Gateway → ALB → ECS Services
 
 ### Deployment Flow
 ```
-Application: GitHub Actions → Docker Build → Trivy Scan → ECR → SSM Parameter → ECS Update
+Application: GitHub Actions → Docker Build → Trivy Scan → Container Test → ECR → SSM Parameter → ECS Update
 Infrastructure: GitHub Actions → Terraform Plan → Manual Review → Terraform Apply
 ```
 
@@ -119,6 +119,7 @@ Manual trigger after plan review - applies approved infrastructure changes.
 │   ├── backend.tf           # S3 backend configuration
 │   ├── locals.tf            # Subnet mappings and local values
 │   ├── main.tf              # Module composition
+│   ├── remote_state.tf      # S3 bucket and DynamoDB table for state management
 │   └── variables.tf         # Input variables
 └── README.md
 ```
