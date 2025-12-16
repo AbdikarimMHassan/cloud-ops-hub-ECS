@@ -1,6 +1,6 @@
 # AWS ECS Two-Tier Architecture with CI/CD
 
-![Architecture Diagram](docs/aws_architecture_diagram.png)
+![Architecture Diagram](images/project-ecs-diagram.png)
 
 A production-ready, highly available containerized application deployment on AWS ECS using Terraform and automated CI/CD with GitHub Actions.
 
@@ -269,12 +269,15 @@ Push changes to `app/` or `docker/` directories to trigger the build pipeline au
 ## Deployment Visuals
 
 ### Build & Push Pipeline
-![Build Pipeline Success](docs/build-pipeline-success.png)
+![Build Pipeline Success](images/build-pipeline-success.png)
 
 ### Terraform Plan Pipeline
-![Terraform Plan Success](docs/terraform-plan-success.png)
+![Terraform Plan Success](images/terraform-plan-success.png)
 
 ### Terraform Apply Pipeline
-![Terraform Apply Success](docs/terraform-apply-success.png)
+![Terraform Apply Success](images/terraform-apply-success.png)
 
+---
+
+**Note:** This is a portfolio project demonstrating AWS cloud architecture, Infrastructure as Code, and DevOps best practices.
 
