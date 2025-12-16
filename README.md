@@ -113,6 +113,7 @@ Manual trigger after plan review - applies approved infrastructure changes.
 ├── .github/workflows/       # CI/CD pipelines (build, plan, deploy)
 ├── app/                     # Application source code
 ├── docker/                  # dockerfile
+├── images/                  # Architecture diagrams and screenshots
 ├── infra/                   # Terraform root module
 │   ├── modules/             # Reusable modules (vpc, ecs, alb, etc.)
 │   ├── backend.tf           # S3 backend configuration
@@ -267,8 +268,8 @@ Push changes to `app/` or `docker/` directories to trigger the build pipeline au
 
 ## Deployment Visuals
 
-### Architecture Diagram
-![Architecture Diagram](images/project-ecs-diagram.png)
+### Live Application
+![Cloud Ops Hub Website](images/website-image.png)
 
 ### Build & Push Pipeline
 ![Build Pipeline Success](images/build-push-dark.png)
@@ -278,5 +279,6 @@ Push changes to `app/` or `docker/` directories to trigger the build pipeline au
 
 ### Terraform Deploy Pipeline
 ![Terraform Deploy Success](images/Terraform-deploy-dark.png)
+
 
 
