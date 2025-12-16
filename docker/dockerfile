@@ -18,6 +18,8 @@ WORKDIR /app
 
 COPY --from=build /app/dist /usr/share/nginx/html
 
+RUN apk add --no-cache curl
+
 RUN addgroup -S nonroot && adduser -S nonroot -G nonroot
 
 RUN chown -R nonroot:nonroot /usr/share/nginx/html \
