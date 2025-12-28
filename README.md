@@ -94,7 +94,7 @@ Infrastructure: GitHub Actions → Terraform Plan → Manual Review → Terrafor
 
 ### Monitoring & Observability
 - CloudWatch Log Groups for debugging
-- CloudWatch Alarms monitoring CPU utilization (80% threshold)
+- CloudWatch Alarms monitoring CPU utilisation (80% threshold)
 - SNS notifications for alarm triggers
 
 ## Infrastructure Components
@@ -114,7 +114,7 @@ The application uses a multi-stage Docker build for optimal image size and secur
 
 ### Best Practices Implemented
 
-1. **Image Size Optimization**
+1. **Image Size Optimisation**
    - Multi-stage builds separate build and runtime
    - Alpine Linux base for minimal footprint
    - Production stage only includes built artifacts
@@ -125,16 +125,16 @@ The application uses a multi-stage Docker build for optimal image size and secur
    - Nginx hardening with proper permissions
 
 3. **Build Efficiency**
-   - Layer caching optimization
+   - Layer caching optimisation
    - Only necessary files in production image
 
 ### Image Size Results
 
-**Before Optimization:** 651 MB (single-stage build)
-**After Optimization:** 54.5 MB (multi-stage build)
+**Before Optimisation:** 651 MB (single-stage build)
+**After Optimisation:** 54.5 MB (multi-stage build)
 **Size Reduction:** 91.6% improvement
 
-#### Visual Proof of Optimization
+#### Visual Proof of Optimisation
 
 **Single-Stage Build:**
 
@@ -153,7 +153,7 @@ Instead of repeating subnet resources, I created a map-based approach:
 - Pass subnet configurations via `locals.tf` in root module
 
 ### Modular Architecture
-Separate modules for each AWS service enable reusability and maintainability. All values passed via `terraform.tfvars` for environment-specific customization.
+Separate modules for each AWS service enable reusability and maintainability. All values passed via `terraform.tfvars` for environment-specific customisation.
 
 ### State Management
 - **S3 Backend:** Versioned, encrypted, with object lock (governance mode)
@@ -162,7 +162,7 @@ Separate modules for each AWS service enable reusability and maintainability. Al
 
 ## CI/CD Pipeline
 
-The CI/CD pipeline orchestrates the entire deployment process, automating both containerization and infrastructure provisioning through GitHub Actions.
+The CI/CD pipeline orchestrates the entire deployment process, automating both containerisation and infrastructure provisioning through GitHub Actions.
 
 ### Build Pipeline
 Triggered on push to `app/` or `docker/` directories:
@@ -179,17 +179,17 @@ Triggered on push to `app/` or `docker/` directories:
 Triggered on push to `infra/` directory:
 1. **Static Analysis:** terraform fmt, validate, and tflint
 2. **Security Scanning:** Parallel Trivy and Checkov scans using GitHub Actions matrix strategy
-3. **Plan Generation:** Creates execution plan and uploads artifact
+3. **Plan Generation:** Creates execution plan and uploads artefact
 
 ### Terraform Deploy Pipeline
 Manual trigger after plan review - applies approved infrastructure changes.
 
 ## Monitoring
 
-**CloudWatch Logs:** Centralized logging for all ECS tasks
+**CloudWatch Logs:** Centralised logging for all ECS tasks
 
 **CloudWatch Alarms:** 
-- Average CPU utilization monitoring
+- Average CPU utilisation monitoring
 - Triggers SNS notification at 80% threshold
 - Can be extended for auto-scaling decisions
 
@@ -246,7 +246,7 @@ cp terraform.tfvars.example terraform.tfvars
 # Edit terraform.tfvars with your values
 ```
 
-### 4. Initialize and Deploy Infrastructure
+### 4. Initialise and Deploy Infrastructure
 ```bash
 terraform init
 terraform plan
