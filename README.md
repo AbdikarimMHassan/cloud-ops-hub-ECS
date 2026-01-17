@@ -53,7 +53,7 @@ A production-grade deployment of a Cloud Ops Hub platform on AWS ECS Fargate, pr
 ### Tier 2: Private Subnet (Application Tier)
 - ECS Fargate services running Docker containers
 - No direct internet access for enhanced security
-- High availability across two AZs
+- High availability across two AZs 
 
 ### Traffic Flow
 ```
